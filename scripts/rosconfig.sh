@@ -69,6 +69,7 @@ function rosconfig() {
    fi
 
    source /opt/ros/$ROS_DISTRO/setup.bash
+   source /usr/share/gazebo/setup.bash
 
    case "$ROS_VERSION" in
    1)
