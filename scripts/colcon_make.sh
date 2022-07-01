@@ -91,8 +91,6 @@ function colcon_make() {
         shift
     done
 
-    echo $WHITE_LIST
-
     # white list
     if ((${#WHITE_LIST[@]})); then
         readarray -d ":" -t strarr <<<"$WHITE_LIST"
