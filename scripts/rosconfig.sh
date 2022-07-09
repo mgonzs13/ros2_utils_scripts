@@ -69,7 +69,11 @@ function rosconfig() {
    fi
 
    source /opt/ros/$ROS_DISTRO/setup.bash
-   source /usr/share/gazebo/setup.bash
+
+   local gazebo_setup=/usr/share/gazebo/setup.bash
+   if [ -f "$gazebo_setup" ]; then
+      source /usr/share/gazebo/setup.bash
+   fi
 
    case "$ROS_VERSION" in
    1)
@@ -88,7 +92,9 @@ function rosconfig() {
    esac
 
    if [ -d "$ROS_WS" ]; then
-      source $PATH_TO_INSTALL_DIR/setup.bash
+      if [ -f "$PATH_TO_INSTALL_DIR/setup.bash" ]; then
+         source $PATH_TO_INSTALL_DIR/setup.bash
+      fi
    fi
 
 }
