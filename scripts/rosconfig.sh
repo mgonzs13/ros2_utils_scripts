@@ -78,7 +78,7 @@ function rosconfig() {
    case "$ROS_VERSION" in
    1)
       echo "ROS1 $ROS_DISTRO"
-      ROS_MASTER_URI=http://$ROS_MASTER_URI:11311
+      ROS_MASTER_URI=http://$ROS_MASTER_URI:11311/
       PATH_TO_INSTALL_DIR=$ROS_WS/devel
       ;;
 
