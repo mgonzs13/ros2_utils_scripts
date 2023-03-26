@@ -5,7 +5,7 @@ Set of shell scripts for ROS 2
 ## Installation
 
 ```shell
-$ git clone git@github.com:mgonzs13/ros2_utils_scripts.git
+$ git clone https://github.com/mgonzs13/ros2_utils_scripts.git
 $ echo "source ${PWD}/ros2_utils_scripts/scripts/all.sh" >> ~/.bashrc
 ```
 
