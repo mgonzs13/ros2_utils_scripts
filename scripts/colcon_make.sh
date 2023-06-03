@@ -50,7 +50,7 @@ function _auto_complete_colcon_make() {
     -j) COMPREPLY+=() ;;
 
     *)
-        COMPREPLY+=($(compgen -W "-j -WHITE_LIST -BLACK_LIST -SYMLINK -SEQUENCIAL -h" -- "$cur"))
+        COMPREPLY+=($(compgen -W "-j -WHITE_LIST -BLACK_LIST -NO-SYMLINK -SEQUENCIAL -h" -- "$cur"))
         ;;
     esac
 }
@@ -61,16 +61,16 @@ function colcon_make() {
     local JOBS=$(grep -c ^processor /proc/cpuinfo)
     local WHITE_LIST=()
     local BLACK_LIST=()
-    local SYMLINK=""
+    local SYMLINK="--symlink-install"
     local SEQUENCIAL=""
 
     helpFunction() {
         echo ""
-        echo "Usage: colcon_make -j JOBS -WHITE_LIST WHITE_LIST -BLACK_LIST BLACK_LIST -SYMLINK -SEQUENCIAL"
+        echo "Usage: colcon_make -j JOBS -WHITE_LIST WHITE_LIST -BLACK_LIST BLACK_LIST -NO-SYMLINK -SEQUENCIAL"
         echo -e "\t-j JOBS"
         echo -e "\t-WHITE_LIST \"WHITE_LIST\" (ROS 2 pacakges separated by :)"
         echo -e "\t-BLACK_LIST \"BLACK_LIST\" (ROS 2 pacakges separated by :)"
-        echo -e "\t-SYMLINK"
+        echo -e "\t-NO-SYMLINK"
         echo -e "\t-SEQUENCIAL"
         echo -e "\t-h Help"
     }
@@ -84,7 +84,7 @@ function colcon_make() {
         -j) JOBS="$2" ;;
         -WHITE_LIST) WHITE_LIST="$2" ;;
         -BLACK_LIST) BLACK_LIST="$2" ;;
-        -SYMLINK) SYMLINK="--symlink-install" ;;
+        -NO-SYMLINK) SYMLINK="" ;;
         -SEQUENCIAL) SEQUENCIAL="--executor sequential" ;;
 
         esac
