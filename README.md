@@ -34,3 +34,9 @@ $ colcon_make -j JOBS -WHITE_LIST PKG1:PKG2 -BLACK_LIST PKG3:PKG4 -SYMLINK -SEQU
 ```shell
 $ colcon_make -j 1 -SEQUENCIAL
 ```
+
+### killrosdaemon
+
+```shell
+$ killrosdaemon
+```

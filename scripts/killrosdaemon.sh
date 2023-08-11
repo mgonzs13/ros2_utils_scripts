@@ -15,5 +15,8 @@
 
 function killrosdaemon() {
     ros_daemon_pid=$(ps aux| grep ros2  | grep daemon | awk '{print $2}')
-    kill -9 $ros_daemon_pid
+
+   if [ $ros_daemon_pid ]; then
+      kill -9 $ros_daemon_pid
+   fi
 }
