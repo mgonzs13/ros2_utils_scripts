@@ -66,7 +66,7 @@ function _auto_complete_colcon_make() {
     -j) COMPREPLY+=() ;;
 
     *)
-        COMPREPLY+=($(compgen -W "-j -WHITE_LIST -BLACK_LIST -NO-SYMLINK -SEQUENCIAL -h" -- "$cur"))
+        COMPREPLY+=($(compgen -W "-j -WHITE_LIST -BLACK_LIST -NO-SYMLINK -SEQUENCIAL -h --cmake-args" -- "$cur"))
         ;;
     esac
 }
@@ -79,15 +79,17 @@ function colcon_make() {
     local BLACK_LIST=()
     local SYMLINK="--symlink-install"
     local SEQUENCIAL=""
+    local CMAKE_ARGS=""
 
     helpFunction() {
         echo ""
-        echo "Usage: colcon_make -j JOBS -WHITE_LIST WHITE_LIST -BLACK_LIST BLACK_LIST -NO-SYMLINK -SEQUENCIAL"
+        echo "Usage: colcon_make -j JOBS -WHITE_LIST WHITE_LIST -BLACK_LIST BLACK_LIST -NO-SYMLINK -SEQUENCIAL --cmake-args CMAKE_ARGS"
         echo -e "\t-j JOBS"
         echo -e "\t-WHITE_LIST \"WHITE_LIST\" (ROS 2 pacakges separated by :)"
         echo -e "\t-BLACK_LIST \"BLACK_LIST\" (ROS 2 pacakges separated by :)"
         echo -e "\t-NO-SYMLINK"
         echo -e "\t-SEQUENCIAL"
+        echo -e "\t--cmake-args \"CMAKE_ARGS\""
         echo -e "\t-h Help"
     }
 
@@ -102,7 +104,7 @@ function colcon_make() {
         -BLACK_LIST) BLACK_LIST="$2" ;;
         -NO-SYMLINK) SYMLINK="" ;;
         -SEQUENCIAL) SEQUENCIAL="--executor sequential" ;;
-
+        --cmake-args) CMAKE_ARGS="--cmake-args $2" ;;
         esac
         shift
     done
@@ -127,7 +129,7 @@ function colcon_make() {
         done
     fi
 
-    local colcon_cmd="export MAKEFLAGS='-j ${JOBS}' && colcon build ${SYMLINK} --parallel-workers ${JOBS} ${SEQUENCIAL} $WHITE_LIST $BLACK_LIST && source install/setup.bash"
+    local colcon_cmd="export MAKEFLAGS='-j ${JOBS}' && colcon build ${SYMLINK} --parallel-workers ${JOBS} ${SEQUENCIAL} $WHITE_LIST $BLACK_LIST $CMAKE_ARGS && source install/setup.bash"
     eval $colcon_cmd
     unset MAKEFLAGS
 }
