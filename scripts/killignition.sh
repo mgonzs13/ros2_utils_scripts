@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-# Copyright (C) 2023  Miguel Ángel González Santamarta
+# Copyright (C) 2025  Miguel Ángel González Santamarta
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,8 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-source ${SCRIPT_DIR}/colcon_make.sh
-source ${SCRIPT_DIR}/rosconfig.sh
-source ${SCRIPT_DIR}/killrosdaemon.sh
-source ${SCRIPT_DIR}/killignition.sh
+function killrosdaemon() {
+   ros_daemon_pids=$(ps aux | grep ign | awk '{print $2}')
+
+   if [ -n "$ros_daemon_pids" ]; then
+      echo "$ros_daemon_pids" | xargs -r kill -9
+   fi
+}
