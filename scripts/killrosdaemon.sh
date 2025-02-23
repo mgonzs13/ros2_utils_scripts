@@ -14,9 +14,9 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 function killrosdaemon() {
-    ros_daemon_pid=$(ps aux| grep ros2  | grep daemon | awk '{print $2}')
+   ros_daemon_pids=$(ps aux | grep ros2 | grep daemon | awk '{print $2}')
 
-   if [ $ros_daemon_pid ]; then
-      kill -9 $ros_daemon_pid
+   if [ -n "$ros_daemon_pids" ]; then
+      echo "$ros_daemon_pids" | xargs -r kill -9
    fi
 }
