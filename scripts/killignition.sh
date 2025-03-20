@@ -13,10 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-function killrosdaemon() {
-   ros_daemon_pids=$(ps aux | grep ign | awk '{print $2}')
+function killignition() {
+   ignition_pids=$(ps aux | grep ign | awk '{print $2}')
 
-   if [ -n "$ros_daemon_pids" ]; then
-      echo "$ros_daemon_pids" | xargs -r kill -9
+   if [ -n "$ignition_pids" ]; then
+      echo "$ignition_pids" | xargs -r kill -9
    fi
 }
